@@ -1,0 +1,99 @@
+    # with st.container():
+    #     # st.text_input("Jokowi", "jokowi")
+    #     st.header("Jokowowo")
+    #     st.write("WeleoWleoeWleo")
+        
+    # # Load the CSV file
+    # csv_file = 'Jko.csv' 
+    # Actual = 'act.csv'# Replace with your actual file name
+    # df = pd.read_csv(csv_file)
+    # dfact = pd.read_csv(Actual)
+    # # Ensure the DataFrame is sorted by date and get the last 60 days
+    # df['Date'] = pd.to_datetime(df['Date'])
+    # df = df.sort_values(by='Date').tail(60)
+
+    # # Split the layout into two columns
+    # col1, col2 = st.columns(2)
+
+    # # Column 1: Actual Data
+    # with col1:
+    #     st.write("Actual Bitcoin Prices for the Last 60 Days")
+    #     st.dataframe(df)  # Display only Date and Actual_Price columns
+    #     st.line_chart(df.set_index('Date')['BTC_Price'])  # Line chart for actual prices
+
+    # # Column 2: Predicted Data
+    # with col2:
+    #     st.write("Predicted Bitcoin Prices for the Last 60 Days")
+    #     st.dataframe(dfact)  # Display only Date and Predicted_Price columns
+    #     st.line_chart(dfact['0'])  # Line chart for predicted prices
+
+    #     # Load the CSV file
+
+
+    # # st.write("Hello Wrold")
+
+    # # Load the CSV file
+    # csv_file = 'Jko.csv'  # Replace with your actual file name
+    # df = pd.read_csv(csv_file)
+
+    # # Ensure the DataFrame is sorted by date and get the last 60 days
+    # df['Date'] = pd.to_datetime(df['Date'])
+    # df = df.sort_values(by='Date').tail(60)
+
+    # # Split the layout into two columns
+    # col1, col2 = st.columns(2)
+
+    # # Column 1: Actual Data
+    # with col1:
+    #     st.write("Actual Bitcoin Prices for the Last 60 Days")
+    #     st.dataframe(df)  # Display only Date and Actual_Price columns
+    #     st.line_chart(df.set_index('Date')['BTC_Price'])  # Line chart for actual prices
+
+    # # Column 2: Predicted Data
+    # with col2:
+    #     st.write("Actual Bitcoin Prices for the Last 60 Days")
+    #     st.dataframe(df)  # Display only Date and Actual_Price columns
+    #     st.line_chart(df.set_index('Date')['BTC_Price'])  # Line chart for actual prices
+
+    # # Load the pre-trained model
+    # model_file = 'lstm_model.h5'  # Replace with your actual model file name
+    # model = tf.keras.models.load_model(model_file)
+    
+
+    # # Prepare the data for prediction
+    
+    # data = df[['BTC_Price']].values
+    # data_scaled = scaler.fit_transform(data)
+
+    # # Create the input data for prediction (last 60 days)
+    # X_input = data_scaled[-60:]
+    # X_input = X_input.reshape((1, X_input.shape[0], X_input.shape[1]))
+
+    # # Make predictions for the next 7 days
+    # predictions = []
+    # for _ in range(7):
+    #     pred = model.predict(X_input)
+    #     predictions.append(pred[0, 0])
+    #     # Update input with the new prediction
+    #     X_input = np.append(X_input[:, 1:, :], [[pred]], axis=1)
+
+    # # Inverse transform predictions to original scale
+    # predictions = scaler.inverse_transform(np.array(predictions).reshape(-1, 1)).flatten()
+
+    # # Create a new DataFrame to display the predictions
+    # future_dates = pd.date_range(df['Date'].max() + pd.Timedelta(days=1), periods=7)
+    # pred_df = pd.DataFrame({'Date': future_dates, 'Predicted_Price': predictions})
+
+    # # Display the prediction results
+    # st.write("Predicted Bitcoin Prices for the Next 7 Days")
+    # st.dataframe(pred_df)
+    # st.line_chart(pred_df.set_index('Date')['Predicted_Price'])
+
+    # # Plot combined actual and predicted prices for better visualization
+    # combined_df = pd.concat([df[['Date', 'BTC_Price']], pred_df.rename(columns={'Predicted_Price': 'BTC_Price'})])
+    # st.write("Actual and Predicted Bitcoin Prices")
+    # fig, ax = plt.subplots()
+    # ax.plot(combined_df['Date'], combined_df['BTC_Price'], label='Actual')
+    # ax.plot(pred_df['Date'], pred_df['Predicted_Price'], label='Predicted', linestyle='--')
+    # ax.legend()
+    # st.pyplot(fig)
